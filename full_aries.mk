@@ -27,7 +27,7 @@ PRODUCT_NAME := full_aries
 PRODUCT_DEVICE := aries
 PRODUCT_BRAND := Android
 PRODUCT_MODEL := MI 2
-PRODUCT_MANUFACTURER := XiaoMi
+PRODUCT_MANUFACTURER := Xiaomi
 PRODUCT_RESTRICT_VENDOR_FILES := false
 
 # Inherit from hardware-specific part of the product configuration

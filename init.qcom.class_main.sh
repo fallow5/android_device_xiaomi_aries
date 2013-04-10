@@ -1,5 +1,5 @@
 #!/system/bin/sh
-# Copyright (c) 2012, The Linux Foundation. All rights reserved.
+# Copyright (c) 2012, Code Aurora Forum. All rights reserved.
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -8,7 +8,7 @@
 #     * Redistributions in binary form must reproduce the above copyright
 #       notice, this list of conditions and the following disclaimer in the
 #       documentation and/or other materials provided with the distribution.
-#     * Neither the name of The Linux Foundation nor
+#     * Neither the name of Code Aurora nor
 #       the names of its contributors may be used to endorse or promote
 #       products derived from this software without specific prior written
 #       permission.
@@ -58,4 +58,65 @@ case "$baseband" in
         "true")
         start netmgrd
     esac
+esac
+
+#
+# enable bluetooth profiles dynamically
+#
+case $baseband in
+  "apq")
+      setprop ro.qualcomm.bluetooth.opp true
+      setprop ro.qualcomm.bluetooth.hfp false
+      setprop ro.qualcomm.bluetooth.hsp false
+      setprop ro.qualcomm.bluetooth.pbap true
+      setprop ro.qualcomm.bluetooth.ftp true
+      setprop ro.qualcomm.bluetooth.map true
+      setprop ro.qualcomm.bluetooth.nap false
+      setprop ro.qualcomm.bluetooth.sap false
+      setprop ro.qualcomm.bluetooth.dun false
+      ;;
+  "mdm" | "svlte2a" | "svlte1" | "csfb")
+      setprop ro.qualcomm.bluetooth.opp true
+      setprop ro.qualcomm.bluetooth.hfp true
+      setprop ro.qualcomm.bluetooth.hsp true
+      setprop ro.qualcomm.bluetooth.pbap true
+      setprop ro.qualcomm.bluetooth.ftp true
+      setprop ro.qualcomm.bluetooth.map true
+      setprop ro.qualcomm.bluetooth.nap true
+      setprop ro.qualcomm.bluetooth.sap true
+      setprop ro.qualcomm.bluetooth.dun false
+      ;;
+  "msm")
+      setprop ro.qualcomm.bluetooth.opp true
+      setprop ro.qualcomm.bluetooth.hfp true
+      setprop ro.qualcomm.bluetooth.hsp true
+      setprop ro.qualcomm.bluetooth.pbap true
+      setprop ro.qualcomm.bluetooth.ftp true
+      setprop ro.qualcomm.bluetooth.map true
+      setprop ro.qualcomm.bluetooth.nap true
+      setprop ro.qualcomm.bluetooth.sap true
+      setprop ro.qualcomm.bluetooth.dun true
+      ;;
+  "mpq")
+      setprop ro.qualcomm.bluetooth.opp false
+      setprop ro.qualcomm.bluetooth.hfp false
+      setprop ro.qualcomm.bluetooth.hsp false
+      setprop ro.qualcomm.bluetooth.pbap false
+      setprop ro.qualcomm.bluetooth.ftp false
+      setprop ro.qualcomm.bluetooth.map false
+      setprop ro.qualcomm.bluetooth.nap false
+      setprop ro.qualcomm.bluetooth.sap false
+      setprop ro.qualcomm.bluetooth.dun false
+      ;;
+  *)
+      setprop ro.qualcomm.bluetooth.opp true
+      setprop ro.qualcomm.bluetooth.hfp true
+      setprop ro.qualcomm.bluetooth.hsp true
+      setprop ro.qualcomm.bluetooth.pbap true
+      setprop ro.qualcomm.bluetooth.ftp true
+      setprop ro.qualcomm.bluetooth.map true
+      setprop ro.qualcomm.bluetooth.nap true
+      setprop ro.qualcomm.bluetooth.sap true
+      setprop ro.qualcomm.bluetooth.dun true
+      ;;
 esac

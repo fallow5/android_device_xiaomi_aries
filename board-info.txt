@@ -1,1 +1,2 @@
-require board=aries
+require board=aries|J1TM
+

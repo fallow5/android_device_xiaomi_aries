@@ -16,15 +16,13 @@
 
 TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
 TARGET_GLOBAL_CPPFLAGS += -mfpu=neon -mfloat-abi=softfp
-TARGET_ARCH := arm
-TARGET_NO_BOOTLOADER := true
-TARGET_BOARD_PLATFORM := unknown
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_CPU_SMP := true
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 ARCH_ARM_HAVE_TLS_REGISTER := true
+TARGET_SPECIFIC_HEADER_PATH := device/xiaomi/aries/kernel-headers
 
 # Krait optimizations
 TARGET_USE_KRAIT_BIONIC_OPTIMIZATION := true
@@ -38,8 +36,9 @@ TARGET_NO_BOOTLOADER := true
 
 BOARD_KERNEL_BASE := 0x80200000
 BOARD_KERNEL_PAGESIZE := 2048
-BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=aries lpj=67677
+BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom ehci-hcd.park=3
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01600000
+BOARD_CUSTOM_KERNEL_MK := device/xiaomi/aries/kernel.mk
 
 # Try to build the kernel
 TARGET_KERNEL_CONFIG := aries_defconfig
@@ -54,7 +53,7 @@ BLUETOOTH_HCI_USE_MCT := true
 
 TARGET_NO_RADIOIMAGE := true
 TARGET_BOARD_PLATFORM := msm8960
-TARGET_BOOTLOADER_BOARD_NAME := aries
+TARGET_BOOTLOADER_BOARD_NAME := MSM8960
 TARGET_BOOTLOADER_NAME=aries
 TARGET_BOARD_INFO_FILE := device/xiaomi/aries/board-info.txt
 
@@ -83,6 +82,9 @@ TARGET_USES_C2D_COMPOSITION := true
 
 TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
 TARGET_RECOVERY_UI_LIB := librecovery_ui_aries
+BOARD_CUSTOM_GRAPHICS := ../../../device/xiaomi/aries/recovery/graphics.c
+BOARD_CUSTOM_RECOVERY_KEYMAPPING := ../../device/xiaomi/aries/recovery/recovery_keys.c
+BOARD_USE_CUSTOM_RECOVERY_FONT := \"roboto_15x24.h\"
 
 TARGET_USERIMAGES_USE_EXT4 := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 23068672 # 22M
@@ -104,10 +106,11 @@ TARGET_NO_RPC := true
 
 TARGET_RELEASETOOLS_EXTENSIONS := device/xiaomi/aries
 
-BOARD_CHARGER_ENABLE_SUSPEND := true
-
 BOARD_HAVE_LOW_LATENCY_AUDIO := true
 
 -include vendor/xiaomi/aries/BoardConfigVendor.mk
 
 BOARD_HAS_NO_SELECT_BUTTON := true
+
+TARGET_QCOM_DISPLAY_VARIANT := caf
+

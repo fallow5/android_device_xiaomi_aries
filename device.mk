@@ -48,37 +48,40 @@ PRODUCT_COPY_FILES += \
 	device/xiaomi/aries/WCNSS_qcom_wlan_nv.bin:system/etc/wifi/WCNSS_qcom_wlan_nv.bin
 
 PRODUCT_COPY_FILES += \
+	device/xiaomi/aries/snd_soc_msm:system/etc/snd_soc_msm/snd_soc_msm \
+	device/xiaomi/aries/snd_soc_msm_2x:system/etc/snd_soc_msm/snd_soc_msm_2x \
 	device/xiaomi/aries/snd_soc_msm_2x_Fusion3:system/etc/snd_soc_msm/snd_soc_msm_2x_Fusion3 \
+	device/xiaomi/aries/snd_soc_msm_Sitar:system/etc/snd_soc_msm/snd_soc_msm_Sitar \
 	device/xiaomi/aries/audio_policy.conf:system/etc/audio_policy.conf
 
 PRODUCT_COPY_FILES += \
 	device/xiaomi/aries/thermald-aries.conf:system/etc/thermald.conf
 
 PRODUCT_COPY_FILES += \
-	device/xiaomi/aries/init.aries.rc:root/init.aries.rc \
-	device/xiaomi/aries/init.aries.usb.rc:root/init.aries.usb.rc \
-	device/xiaomi/aries/fstab.aries:root/fstab.aries \
-	device/xiaomi/aries/ueventd.aries.rc:root/ueventd.aries.rc \
+	device/xiaomi/aries/init.qcom.rc:root/init.qcom.rc \
+	device/xiaomi/aries/init.qcom.sh:root/init.qcom.sh \
+	device/xiaomi/aries/init.qcom.usb.rc:root/init.qcom.usb.rc \
+	device/xiaomi/aries/init.qcom.usb.sh:root/init.qcom.usb.sh \
+	device/xiaomi/aries/init.target.rc:root/init.target.rc \
+	device/xiaomi/aries/init.qcom.class_core.sh:root/init.qcom.class_core.sh \
+	device/xiaomi/aries/init.qcom.class_main.sh:root/init.qcom.class_main.sh \
+	device/xiaomi/aries/fstab.mako:root/fstab.mako \
+	device/xiaomi/aries/ueventd.qcom.rc:root/ueventd.qcom.rc \
 	device/xiaomi/aries/media_profiles.xml:system/etc/media_profiles.xml \
 	device/xiaomi/aries/media_codecs.xml:system/etc/media_codecs.xml
 
-PRODUCT_COPY_FILES += \
-	device/xiaomi/aries/kickstart_checker.sh:system/etc/kickstart_checker.sh
-
 # Prebuilt kl and kcm keymaps
 PRODUCT_COPY_FILES += \
-	device/xiaomi/aries/apq8064-tabla-snd-card_Button_Jack.kl:system/usr/keylayout/apq8064-tabla-snd-card_Button_Jack.kl \
-	device/xiaomi/aries/hs_detect.kl:system/usr/keylayout/hs_detect.kl \
-	device/xiaomi/aries/pmic8xxx_pwrkey.kl:system/usr/keylayout/pmic8xxx_pwrkey.kl \
-	device/xiaomi/aries/keypad_8064.kl:system/usr/keylayout/keypad_8064.kl \
-	device/xiaomi/aries/apq8064-tabla-snd-card_Button_Jack.kcm:system/usr/keychars/apq8064-tabla-snd-card_Button_Jack.kcm \
-	device/xiaomi/aries/hs_detect.kcm:system/usr/keychars/hs_detect.kcm \
-	device/xiaomi/aries/keypad_8064.kcm:system/usr/keychars/keypad_8064.kcm \
-	device/xiaomi/aries/pmic8xxx_pwrkey.kcm:system/usr/keychars/pmic8xxx_pwrkey.kcm
-
-# Prebuilt input device calibration files
-PRODUCT_COPY_FILES += \
-	device/xiaomi/aries/touch_dev.idc:system/usr/idc/touch_dev.idc
+	device/xiaomi/aries/atmel_mxt_ts.kl:system/usr/keylayout/atmel_mxt_ts.kl \
+	device/xiaomi/aries/Button_Jack.kl:system/usr/keylayout/Button_Jack.kl \
+	device/xiaomi/aries/cyttsp-i2c.kl:system/usr/keylayout/cyttsp-i2c.kl \
+	device/xiaomi/aries/gpio-keys.kl:system/usr/keylayout/gpio-keys.kl \
+	device/xiaomi/aries/keypad_8960.kl:system/usr/keylayout/keypad_8960.kl \
+	device/xiaomi/aries/keypad_8960_liquid.kl:system/usr/keylayout/keypad_8960_liquid.kl \
+	device/xiaomi/aries/philips_remote_ir.kl:system/usr/keylayout/philips_remote_ir.kl \
+	device/xiaomi/aries/samsung_remote_ir.kl:system/usr/keylayout/samsung_remote_ir.kl \
+	device/xiaomi/aries/sensor00fn1a.kl:system/usr/keylayout/sensor00fn1a.kl \
+	device/xiaomi/aries/ue_rf4ce_remote.kl:system/usr/keylayout/ue_rf4ce_remote.kl
 
 # These are the hardware-specific features
 PRODUCT_COPY_FILES += \
@@ -101,29 +104,6 @@ PRODUCT_COPY_FILES += \
 # GPS configuration
 PRODUCT_COPY_FILES += \
 	device/xiaomi/aries/gps.conf:system/etc/gps.conf
-
-# NFC packages
-PRODUCT_PACKAGES += \
-    libnfc-nci \
-    libnfc_nci_jni \
-    nfc_nci.aries \
-    NfcNci \
-    Tag \
-    com.android.nfc_extras
-
-# NFCEE access control
-ifeq ($(TARGET_BUILD_VARIANT),user)
-    NFCEE_ACCESS_PATH := device/xiaomi/aries/nfc/nfcee_access.xml
-else
-    NFCEE_ACCESS_PATH := device/xiaomi/aries/nfc/nfcee_access_debug.xml
-endif
-
-# NFC access control + feature files + configuration
-PRODUCT_COPY_FILES += \
-    $(NFCEE_ACCESS_PATH):system/etc/nfcee_access.xml \
-    frameworks/native/data/etc/com.android.nfc_extras.xml:system/etc/permissions/com.android.nfc_extras.xml \
-    frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
-    device/xiaomi/aries/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf
 
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.opengles.version=131072
@@ -148,7 +128,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
 	ro.telephony.call_ring.multiple=0
 
 #Upto 3 layers can go through overlays
-PRODUCT_PROPERTY_OVERRIDES += persist.hwc.mdpcomp.enable=true
+PRODUCT_PROPERTY_OVERRIDES += debug.mdpcomp.maxlayer=3
 
 PRODUCT_CHARACTERISTICS := nosdcard
 
@@ -184,9 +164,6 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
 	power.msm8960
 
-PRODUCT_COPY_FILES += \
-	device/xiaomi/aries/init.aries.bt.sh:system/etc/init.aries.bt.sh
-
 PRODUCT_PROPERTY_OVERRIDES += \
 	ro.qualcomm.bt.hci_transport=smd
 
@@ -197,7 +174,8 @@ PRODUCT_PACKAGES += \
 	libmmcamera_interface
 
 PRODUCT_PACKAGES += \
-        libmm-omxcore \
+	mm-vdec-omx-test \
+	mm-venc-omx-test720p \
 	libdivxdrmdecrypt \
 	libOmxVdec \
 	libOmxVenc \
@@ -213,12 +191,7 @@ PRODUCT_PACKAGES += \
 	gps.msm8960
 
 PRODUCT_PACKAGES += \
-	bdAddrLoader \
-	libwfcu \
-	conn_init
-
-PRODUCT_PACKAGES += \
-	keystore.msm8960
+	libwfcu
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	rild.libpath=/system/lib/libril-qc-qmi-1.so
@@ -235,13 +208,13 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # Enable AAC 5.1 output
 PRODUCT_PROPERTY_OVERRIDES += \
-    media.aac_51_output_enabled=true
+	media.aac_51_output_enabled=true
+
+PRODUCT_PROPERTY_OVERRIDES += \
+	debug.prerotation.disable=1
 
 PRODUCT_PROPERTY_OVERRIDES += \
         debug.egl.recordable.rgba8888=1
-
-PRODUCT_PROPERTY_OVERRIDES += \
-	ro.qc.sensors.wl_dis=true
 
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 	persist.sys.usb.config=mtp
@@ -252,7 +225,7 @@ PRODUCT_COPY_FILES += \
 	system/extras/bugmailer/bugmailer.sh:system/bin/bugmailer.sh \
 	system/extras/bugmailer/send_bug:system/bin/send_bug
 
-$(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
+PRODUCT_COPY_FILES += \
+	device/xiaomi/aries/mount_ext4.sh:system/bin/mount_ext4.sh
 
-# This is the aries-specific audio package
-$(call inherit-product, frameworks/base/data/sounds/AudioPackage10.mk)
+$(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
